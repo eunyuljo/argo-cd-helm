@@ -6,18 +6,16 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://argoproj.github.io/argo-helm  # Helm 차트 저장소 URL
-    chart: argo-cd  # 설치할 차트의 이름
-    targetRevision: 7.6.12  # 차트의 버전 (특정 버전을 명시)
+    repoURL: https://github.com/eunyuljo/argo-cd-helm  # Git 저장소 URL로 변경
+    targetRevision: HEAD  # 기본적으로 최신 커밋을 사용할 경우 HEAD로 지정 (특정 브랜치명도 가능)
+    path: .  # 현재 디렉토리에서 차트를 찾는다면 '.'로 지정, 서브 디렉토리라면 그 경로를 입력
     helm:
-      releaseName: argocd  # 릴리스 이름을 지정
+      releaseName: argocd  # 배포할 릴리스 이름
       valueFiles:
-        - values.yaml  # 기본 설정 파일을 지정
+        - values.yaml  # 사용할 values.yaml 파일
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
   syncPolicy:
     automated:
-      prune: true
       selfHeal: true
-

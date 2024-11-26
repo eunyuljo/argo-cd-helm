@@ -2801,7 +2801,7 @@ applicationSet:
   name: applicationset-controller
 
   # -- The number of ApplicationSet controller pods to run
-  replicas: 1
+  replicas: 3
 
   # -- Runtime class name for the ApplicationSet controller
   # @default -- `""` (defaults to global.runtimeClassName)
