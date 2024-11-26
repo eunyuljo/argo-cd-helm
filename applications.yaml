@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd
+  namespace: argocd  # ArgoCD가 설치된 네임스페이스
+spec:
+  project: default
+  source:
+    repoURL: https://argoproj.github.io/argo-helm  # Helm 차트 저장소 URL
+    chart: argo-cd  # 설치할 차트의 이름
+    targetRevision: 7.6.12  # 차트의 버전 (특정 버전을 명시)
+    helm:
+      releaseName: argocd  # 릴리스 이름을 지정
+      valueFiles:
+        - values.yaml  # 기본 설정 파일을 지정
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
